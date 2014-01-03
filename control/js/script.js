@@ -52,7 +52,7 @@
         fh.resetForm();
         if (fh.validateForm()) {
           $.ajax({
-            url: './update.php',
+            url: 'update',
             data: $(this).serialize() + '&action=send',
             type: 'post',
             cache: false,

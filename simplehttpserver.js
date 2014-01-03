@@ -4,7 +4,8 @@ var express = require('express'),
     fs = require('fs'),
     util = require('util'),
     async = require('async'),
-    send = require('send');
+    send = require('send'),
+    update = require('./control/update.js');
 
 var mainapp = express();
 
@@ -19,13 +20,23 @@ var dir = process.argv[2] || process.cwd();
 dir = path.resolve( dir );
 mainapp.use(express.static( dir ));
 
-// Add any dynamic handlers here
-//mainapp.get('/ajax', function(req, res) {
-//   res.send('Query: ' + util.inspect(req.query));
-//});
-//mainapp.post('/test', function(req, res) {
-//   res.send('Parameters: ' + util.inspect(req.body));
-//});
+mainapp.post('/control/update', function(req, res) {
+  var body = req.body;
+
+  console.log('body: ' + util.inspect(req.body));
+
+  var url = body['url'];
+  update(url, function(error, message) {
+    res.send(message);
+
+    if (error) {
+      console.log('error: ' + error);
+      console.log('message: ' + message);
+    } else {
+      console.log(message);
+    }
+  });
+});
 
 // Catch all function when static server did not find any file to serve. In case requested
 // file matched directory, this tries to find first index.html and if that fails it builds
@@ -104,4 +115,4 @@ function directoryHTML( res, urldir, pathname, list ) {
 
 // Fire up server
 mainapp.listen(8088);
-console.log('Listening port 8000 root dir ' + dir );
+console.log('Listening port 8088 root dir ' + dir );
