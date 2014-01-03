@@ -1,20 +1,25 @@
 {
-  "name": "simplehttpserver",
-  "description": "Simple HTTP Server for static files",
+  "name": "serveremotepreview",
+  "description": "Simple HTTP Server to serve Remote-Preview. Derived from simplehttpserver",
   "author": {
     "name": "Teemu Ikonen",
     "email": "teemu.ikonen@ıki.fi"
   },
-  "version": "0.0.2",
+  "contributors": [
+    {
+      "name": "Jesse Armand",
+      "email": "jesse.armand@2359media.com"
+    }
+  ],
+  "version": "0.0.1",
   "scripts": {
-    "start": "forever start simplehttpserver.js"
+    "start": "node serveremotepreview.js"
   },
   "engine": "node >= 0.8.0",
   "dependencies": {
     "send": ">=0.1.0",
     "express": ">=3.0.0",
-    "async": ">= 0.2.6", 
-    "forever": "latest"
+    "async": ">=0.2.6"
   },
   "license": "MIT"
 }
